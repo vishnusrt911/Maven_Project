@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Clone Git Repository') {
             steps {
-                git 'https://github.com/vishnusrt911/Maven_Project.git'
+                git branch: 'main' , url : 'https://github.com/vishnusrt911/Maven_Project.git' 
             }
         }
         stage('Build Spring Maven Project') {
