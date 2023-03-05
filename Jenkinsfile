@@ -12,8 +12,10 @@ pipeline {
         }
         stage('Build Spring Maven Project') {
             steps {
+                echo 'Test script'
                 sh 'pwd'
                 sh 'ls'
+                cd 'Vishnu_Rajendran_Pillai'
                 sh 'mvn clean compile'
             }
         }
