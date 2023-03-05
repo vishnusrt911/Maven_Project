@@ -12,6 +12,8 @@ pipeline {
         }
         stage('Build Spring Maven Project') {
             steps {
+                pwd
+                ls
                 sh 'mvn clean compile'
             }
         }
