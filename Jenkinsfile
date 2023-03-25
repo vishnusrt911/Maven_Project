@@ -38,8 +38,6 @@ pipeline {
                steps {
                     script {
                         bat '''
-                        echo %dockerpassword% &
-                        echo %dockerpassword% &
                         docker login -u %DOCKEHUB_USR% -p %DOCKEHUB_PSW%
                         '''
                     }
