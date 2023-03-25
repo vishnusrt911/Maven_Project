@@ -32,7 +32,7 @@ pipeline {
           stage("Docker login") {
                steps {
                     script {
-                        bat 'docker login -u vishnursrt -p ${DOCKEHUB_PWD}'
+                        bat 'docker login -u vishnursrt -p Vishnu911#'
                     }
                }
                }
