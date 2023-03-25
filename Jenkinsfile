@@ -37,9 +37,11 @@ pipeline {
           stage("Docker login") {
                steps {
                     script {
-                        echo %dockerhub_USR%
-                        echo %dockerhub_PSW%
-                        bat 'docker login -u %dockerhub_USR% -p %dockerhub_PSW%'
+                        bat '''
+                        echo %dockerhub_USR% &
+                        echo %dockerhub_PSW% &
+                        'docker login -u %dockerhub_USR% -p %dockerhub_PSW%'
+                        '''
                     }
                }
                }
