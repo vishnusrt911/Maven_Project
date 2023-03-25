@@ -4,7 +4,7 @@ pipeline {
         maven "MAVEN3"
     }
     environment{
-        DOCKEHUB_PWD=credentials('CredentialsID_DockerHubPWD')
+        DOCKEHUB_PWD=credentials('dockerhub')
     }
  stages {
           stage("Check out") {
@@ -38,7 +38,7 @@ pipeline {
                steps {
                     script {
                         {
-                         sh 'docker login -u vishnursrt -p {DOCKEHUB_PWD}'
+                         sh 'docker login -u $dockerhub_USR --password-stdin'
                       }
                     }
                }
