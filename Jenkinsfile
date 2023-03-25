@@ -19,8 +19,13 @@ pipeline {
                     bat "mvn compile"
                }
           }
+     
+         stage ("Unit test") {
+             steps{
+                 bat "mvn test"
+             }
+         }
           
-
           stage("Docker build") {
                steps {
                         script {
