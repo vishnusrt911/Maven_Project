@@ -16,13 +16,13 @@ pipeline {
           
           stage("Build maven project") {
                steps {
-                    sh 'mvn clean install'
+                    bat "mvn clean compile"
                }
           }
           
           stage("Unit test") {
                steps {
-                    sh "mvn test"
+                    bat "mvn test"
                }
           }
 
