@@ -1,23 +1,56 @@
 pipeline {
     agent any
-
-    tools{
+    tools {
         maven "MAVEN3"
     }
-    stages {
-        stage('Clone Git Repository') {
-            steps {
-                git 'https://github.com/vishnusrt911/Maven_Project.git'
-            }
-        }
-        stage('Build Spring Maven Project') {
-            steps {
-                echo 'Test script'
-                sh 'pwd'
-                sh 'ls'
-                cd 'Vishnu_Rajendran_Pillai'
-                sh 'mvn clean compile'
-            }
-        }
+    environment{
+        DOCKEHUB_PWD=credentials('CredentialsID_DockerHubPWD')
     }
+ stages {
+          stage("Check out") {
+               steps {
+                    echo "current build_id is ${env.BUILD_ID}"
+                    git branch: 'main', url: 'https://github.com/vishnusrt911/Maven_Project.git'
+               }
+          }
+          
+          stage("Build maven project") {
+               steps {
+                    sh 'mvn clean install'
+               }
+          }
+          
+          stage("Unit test") {
+               steps {
+                    sh "mvn test"
+               }
+          }
+
+          stage("Docker build") {
+               steps {
+                        script {
+                                 sh "docker build -t vishnursrt/mavenproject4docker:${env.BUILD_ID} ."
+                               }
+                       }
+          }
+          
+          stage("Docker login") {
+               steps {
+                    script {
+                        {
+                         sh 'docker login -u vishnursrt -p {DOCKEHUB_PWD}'
+                      }
+                    }
+               }
+               }
+               
+          
+          stage("Docker push") {
+               steps {
+                   script {
+                            sh "docker push vishnursrt/mavenproject4docker:${env.BUILD_ID}"
+                         }
+               }
+          }
+        }
 }
