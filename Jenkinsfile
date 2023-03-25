@@ -24,7 +24,7 @@ pipeline {
           stage("Docker build") {
                steps {
                         script {
-                                 sh "docker build -t vishnursrt/mavenproject4docker:${env.BUILD_ID} ."
+                                 bat "docker build -t vishnursrt/mavenproject4docker:${env.BUILD_ID} ."
                                }
                        }
           }
@@ -32,7 +32,7 @@ pipeline {
           stage("Docker login") {
                steps {
                     script {
-                         sh 'docker login -u $dockerhub_USR --password-stdin'
+                         bat 'docker login -u $dockerhub_USR --password-stdin'
                     }
                }
                }
@@ -41,7 +41,7 @@ pipeline {
           stage("Docker push") {
                steps {
                    script {
-                            sh "docker push vishnursrt/mavenproject4docker:${env.BUILD_ID}"
+                            bat "docker push vishnursrt/mavenproject4docker:${env.BUILD_ID}"
                          }
                }
           }
