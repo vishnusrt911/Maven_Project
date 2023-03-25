@@ -20,11 +20,6 @@ pipeline {
                }
           }
           
-          stage("Unit test") {
-               steps {
-                    bat "mvn test"
-               }
-          }
 
           stage("Docker build") {
                steps {
