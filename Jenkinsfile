@@ -4,7 +4,7 @@ pipeline {
         maven "MAVEN3"
     }
     environment{
-        DOCKEHUB_PWD=credentials('dockerpassword')
+        DOCKEHUB=credentials('dockerhub')
     }
  stages {
           stage("Check out") {
@@ -40,7 +40,7 @@ pipeline {
                         bat '''
                         echo %dockerpassword% &
                         echo %dockerpassword% &
-                        docker login -u %dockerhub_USR% -p %dockerhub_PSW%
+                        docker login -u %DOCKEHUB_USR% -p %DOCKEHUB_PSW%
                         '''
                     }
                }
